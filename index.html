@@ -20,10 +20,10 @@
   --cream:#f7ecd6; --pink:#f2b6c6; --orange:#f08a2e;
   --urdu:"Noto Nastaliq Urdu","Jameel Noori Nastaleeq","Alvi Nastaleeq","Nafees Nastaleeq","Noto Naskh Arabic","Segoe UI",serif;
   --num:"Cormorant Garamond",Georgia,"Times New Roman",serif;
-  --hg:min(74vh,138vw);          /* groom height; everything on stage scales from this */
+  --hg:min(62vh,88vw);          /* scaled to keep both figures inside narrow phone screens */
   --ease-out:cubic-bezier(.22,.8,.3,1);
 }
-@supports (height:100svh){ :root{ --hg:min(74svh,138vw); } }
+@supports (height:100svh){ :root{ --hg:min(62svh,88vw); } }
 
 *{ box-sizing:border-box; }
 html,body{ height:100%; }
@@ -142,7 +142,8 @@ a{ color:inherit; }
 .couple{
   position:absolute; left:50%; bottom:max(3.2svh, env(safe-area-inset-bottom)); height:var(--hg);
   transform:translateX(-50%); direction:ltr;
-  display:flex; align-items:flex-end; justify-content:center; gap:calc(var(--hg)*.02);
+  display:flex; align-items:flex-end; justify-content:center; gap:calc(var(--hg)*-.035);
+  width:100vw; max-width:100vw; overflow:visible;
   transition:opacity 1.6s ease, transform 1.8s var(--ease-out), filter 1.6s ease;
 }
 @supports not (height:100svh){ .couple{ bottom:3.2vh; } }
@@ -276,11 +277,23 @@ a.tel:hover{ color:#fff; border-bottom-style:solid; }
   .lantern.l1{ left:62px; } .lantern.l2{ right:62px; }
 }
 @media (max-height:560px) and (orientation:landscape){
-  :root{ --hg:min(70vh,60vw); }
+  :root{ --hg:min(58vh,70vw); }
   .welcome-inner{ padding-top:15%; gap:0; }
   .welcome .title{ font-size:clamp(1.9rem,11vh,3rem); }
   .welcome .bismillah{ font-size:clamp(.9rem,5vh,1.15rem); line-height:2; }
   .welcome .divider{ margin-bottom:.3rem; }
+}
+
+/* Keep the full couple comfortably within phone viewports */
+@media (max-width:640px){
+  :root{ --hg:min(60svh,82vw); }
+  .couple{ left:50%; width:100vw; gap:calc(var(--hg)*-.055); }
+  .fig.groom{ height:var(--hg); }
+  .fig.bride{ height:calc(var(--hg)*.884); }
+}
+@media (max-width:380px){
+  :root{ --hg:min(56svh,76vw); }
+  .couple{ gap:calc(var(--hg)*-.075); }
 }
 
 /* ============ Reduced motion ============ */
@@ -291,6 +304,94 @@ a.tel:hover{ color:#fff; border-bottom-style:solid; }
   .stars i{ opacity:.7; }
   .btn::after{ display:none; }
 }
+
+
+/* ============ Refined luxury finish ============ */
+:root{
+  --e-950:#02150f;
+  --e-900:#032219;
+  --e-800:#06412f;
+  --g-100:#fff8df;
+  --g-200:#f7df9c;
+  --g-300:#e9c56f;
+  --g-400:#cfa04a;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+}
+html{scroll-behavior:smooth;}
+body{
+  background:
+    radial-gradient(ellipse at 50% 8%,rgba(228,190,103,.13),transparent 38%),
+    radial-gradient(ellipse at 12% 72%,rgba(16,112,79,.25),transparent 35%),
+    radial-gradient(ellipse at 90% 68%,rgba(16,112,79,.2),transparent 36%),
+    linear-gradient(145deg,#031a13 0%,#073b2b 48%,#02150f 100%);
+}
+.bg-pattern{opacity:.075;}
+.bg-glow{background:
+  radial-gradient(50% 42% at 50% 40%,rgba(246,220,142,.18),transparent 72%),
+  radial-gradient(80% 45% at 50% 100%,rgba(0,0,0,.55),transparent 72%);}
+.frame{
+  border-color:rgba(247,223,156,.82);
+  box-shadow:0 0 28px rgba(232,196,106,.12),inset 0 0 55px rgba(232,196,106,.055);
+}
+.frame::before{border-color:rgba(247,223,156,.32);}
+.btn{
+  letter-spacing:.01em;
+  background:linear-gradient(135deg,#fff5ce 0%,#f0d17b 42%,#bd8730 100%);
+  box-shadow:0 0 0 1px rgba(255,244,207,.18),0 8px 26px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.85);
+}
+.btn:hover{filter:brightness(1.06);}
+.btn.ghost{backdrop-filter:blur(8px);}
+.arch-art{filter:drop-shadow(0 15px 38px rgba(0,0,0,.18));}
+.title{letter-spacing:.005em;filter:drop-shadow(0 5px 16px rgba(0,0,0,.42));}
+.welcome-inner{gap:clamp(.25rem,1.8vh,.9rem);}
+.card-wrap{
+  padding-top:calc(clamp(52px,7vw,74px) + env(safe-area-inset-top));
+  padding-bottom:calc(clamp(32px,6vw,62px) + env(safe-area-inset-bottom));
+}
+.card{
+  width:min(100%,590px);
+  padding:clamp(2.8rem,7vw,3.7rem) clamp(1.25rem,5.5vw,2.9rem) clamp(1.8rem,5vw,2.7rem);
+  background:
+    radial-gradient(ellipse at 50% 0%,rgba(232,196,106,.11),transparent 45%),
+    linear-gradient(160deg,rgba(7,59,44,.92),rgba(2,25,18,.94));
+  border:1px solid rgba(247,223,156,.82);
+  border-radius:20px;
+  box-shadow:0 0 0 5px rgba(3,26,19,.48),0 0 0 6px rgba(232,196,106,.26),0 28px 90px rgba(0,0,0,.48),inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 70px rgba(232,196,106,.045);
+}
+.card::before{
+  content:"";position:absolute;inset:12px;border:1px solid rgba(232,196,106,.18);border-radius:12px;pointer-events:none;
+}
+.card .medal{top:-31px;filter:drop-shadow(0 6px 15px rgba(0,0,0,.45));}
+.card .bismillah{margin-bottom:.15rem;text-shadow:0 2px 14px rgba(0,0,0,.35);}
+.card .title{margin:.05rem 0 .05rem;}
+.invite{max-width:32ch;color:#fff7e4;line-height:2.55;margin-bottom:1.25rem;}
+.when{
+  position:relative;overflow:hidden;
+  border:1px solid rgba(232,196,106,.42);
+  background:linear-gradient(135deg,rgba(232,196,106,.12),rgba(232,196,106,.035));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035),0 8px 24px rgba(0,0,0,.1);
+}
+.when::before,.when::after{content:"✦";position:absolute;top:50%;transform:translateY(-50%);font-size:.75rem;color:rgba(247,223,156,.72);}
+.when::before{left:12px;}.when::after{right:12px;}
+.date{color:#fff5d2;text-shadow:0 1px 12px rgba(0,0,0,.22);}
+.time{color:#f7df9c;}
+.where{padding:.1rem 0 .25rem;}
+.where .label{letter-spacing:.04em;}
+.venue{text-shadow:0 3px 18px rgba(0,0,0,.38);}
+.addr{color:rgba(255,248,223,.92);}
+.contact{row-gap:.45rem;margin-top:.15rem;}
+a.tel{transition:color .2s ease,border-color .2s ease;}
+a.tel:hover{color:#fff8df;border-color:#fff0b0;}
+.card .btn.ghost{margin-top:.15rem;}
+@media(max-width:420px){
+  .card{padding-left:1.05rem;padding-right:1.05rem;border-radius:16px;}
+  .card::before{inset:9px;border-radius:10px;}
+  .when::before{left:7px}.when::after{right:7px}
+  .date{font-size:clamp(1.12rem,5vw,1.45rem);}
+  .invite{font-size:1rem;}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+
 </style>
 <noscript><style>
   .welcome{ display:none; } .card-wrap{ opacity:1; visibility:visible; } .card{ opacity:1; transform:none; }
